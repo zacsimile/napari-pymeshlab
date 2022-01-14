@@ -8,34 +8,47 @@ Replace code below according to your needs.
 """
 from qtpy.QtWidgets import QWidget, QHBoxLayout, QPushButton
 from magicgui import magic_factory
-
-
-class ExampleQWidget(QWidget):
-    # your QWidget.__init__ can optionally request the napari viewer instance
-    # in one of two ways:
-    # 1. use a parameter called `napari_viewer`, as done here
-    # 2. use a type annotation of 'napari.viewer.Viewer' for any parameter
-    def __init__(self, napari_viewer):
-        super().__init__()
-        self.viewer = napari_viewer
-
-        btn = QPushButton("Click me!")
-        btn.clicked.connect(self._on_click)
-
-        self.setLayout(QHBoxLayout())
-        self.layout().addWidget(btn)
-
-    def _on_click(self):
-        print("napari has", len(self.viewer.layers), "layers")
-
+from napari.layers import Points
+from napari.types import LayerDataTuple
+import numpy
+import pymeshlab as ml
 
 @magic_factory
-def example_magic_widget(img_layer: "napari.layers.Image"):
-    print(f"you have selected {img_layer}")
+def screened_poisson_reconstruction(points_layer: Points, n_neighbors: int = 10, 
+                     smooth_iter: int = 0, flip: bool = False, 
+                     viewpos: numpy.ndarray = [0,0,0], depth: int = 8, 
+                     full_depth: int = 5, cg_depth: int = 0, scale: float = 1.1, 
+                     samples_per_node: float = 1.5, point_weight: float = 4, 
+                     iters: int = 8, confidence: bool = False, 
+                     preclean: bool = False) -> LayerDataTuple:
+    """
+    Run screened poisson reconstruction on a set of points, using pymeshlab.
+    """
 
+    mesh = ml.Mesh(points_layer.data, numpy.empty((1,3)))
+    
+    ms = ml.MeshSet()
+    ms.add_mesh(mesh)
 
-# Uses the `autogenerate: true` flag in the plugin manifest
-# to indicate it should be wrapped as a magicgui to autogenerate
-# a widget.
-def example_function_widget(img_layer: "napari.layers.Image"):
-    print(f"you have selected {img_layer}")
+    # compute normals
+    ms.compute_normals_for_point_sets(k=n_neighbors,  # number of neighbors
+                                      smoothiter=smooth_iter,
+                                      flipflag=flip,
+                                      viewpos=viewpos)
+    # run SPR
+    ms.surface_reconstruction_screened_poisson(visiblelayer=False,
+                                               depth=depth,
+                                               fulldepth=full_depth,
+                                               cgdepth=cg_depth,
+                                               scale=scale,
+                                               samplespernode=samples_per_node,
+                                               pointweight=point_weight,
+                                               iters=iters,
+                                               confidence=confidence,
+                                               preclean=preclean)
+    
+    data = (ms.current_mesh().vertex_matrix(), 
+            ms.current_mesh().face_matrix(), 
+            ms.current_mesh().vertex_color_matrix().T)
+    
+    return [(data, {"name": f"Reconstructed {points_layer.name}"}, "surface")]

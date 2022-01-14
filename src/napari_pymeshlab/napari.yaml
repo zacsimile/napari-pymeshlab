@@ -2,47 +2,61 @@ name: napari-pymeshlab
 display_name: napari pymeshlab
 contributions:
   commands:
-    - id: napari-pymeshlab.get_reader
-      python_name: napari_pymeshlab._reader:napari_get_reader
-      title: Open data with napari pymeshlab
-    - id: napari-pymeshlab.write_multiple
-      python_name: napari_pymeshlab._writer:write_multiple
-      title: Save multi-layer data with napari pymeshlab
-    - id: napari-pymeshlab.write_single_image
-      python_name: napari_pymeshlab._writer:write_single_image
-      title: Save image data with napari pymeshlab
-    - id: napari-pymeshlab.make_sample_data
-      python_name: napari_pymeshlab._sample_data:make_sample_data
-      title: Load sample data from napari pymeshlab 
-    - id: napari-pymeshlab.make_qwidget
-      python_name: napari_pymeshlab._widget:ExampleQWidget
-      title: Make example QWidget
-    - id: napari-pymeshlab.make_magic_widget
-      python_name: napari_pymeshlab._widget:example_magic_widget
-      title: Make example magic widget
-    - id: napari-pymeshlab.make_func_widget
-      python_name: napari_pymeshlab._widget:example_function_widget
-      title: Make example function widget 
+    - id: napari-pymeshlab.get_mesh_reader
+      python_name: napari_pymeshlab._reader:get_mesh_reader
+      title: Use pymeshlab to load meshes as surfaces
+    # - id: napari-pymeshlab.write_multiple
+    #   python_name: napari_pymeshlab._writer:write_multiple
+    #   title: Save multi-layer data with napari pymeshlab
+    - id: napari-pymeshlab.write_single_surface
+      python_name: napari_pymeshlab._writer:write_single_surface
+      title: Save surface data
+    - id: napari-pymeshlab.make_sphere
+      python_name: napari_pymeshlab._sample_data:make_sphere
+      title: Load sample sphere mesh
+    - id: napari-pymeshlab.make_shell
+      python_name: napari_pymeshlab._sample_data:make_shell
+      title: Load sample points on a shell
+    - id: napari-pymeshlab.screened_poisson_reconstruction
+      python_name: napari_pymeshlab._widget:screened_poisson_reconstruction
+      title: Perform Screened Poisson Reconstruction on a point cloud
+    # - id: napari-pymeshlab.make_magic_widget
+    #   python_name: napari_pymeshlab._widget:example_magic_widget
+    #   title: Make example magic widget
+    # - id: napari-pymeshlab.make_func_widget
+    #   python_name: napari_pymeshlab._widget:example_function_widget
+    #   title: Make example function widget 
   readers:
-    - command: napari-pymeshlab.get_reader
+    - command: napari-pymeshlab.get_mesh_reader
       accepts_directories: false
-      filename_patterns: ['*.npy'] 
+      filename_patterns: ['*.3ds', '*.apts', '*.asc', '*.bre', '*.ctm', 
+                          '*.dae', '*.e57', '*.es', '*.fbx', '*.glb', 
+                          '*.gltf', '*.obj', '*.off', '*.pdb', '*.ply',
+                          '*.ptx', '*.qobj', '*.stl', '*.vmi', '*.wrl',
+                          '*.x3d', '.x3dv'] 
   writers:
-    - command: napari-pymeshlab.write_multiple
-      layer_types: ['image*','labels*']
-      filename_extensions: []
-    - command: napari-pymeshlab.write_single_image
-      layer_types: ['image']
-      filename_extensions: ['.npy'] 
+    - command: napari-pymeshlab.write_single_surface
+      layer_types: ['surface']
+      filename_extensions: ['*.3ds', '*.apts', '*.asc', '*.bre', '*.ctm', 
+                          '*.dae', '*.e57', '*.es', '*.fbx', '*.glb', 
+                          '*.gltf', '*.obj', '*.off', '*.pdb', '*.ply',
+                          '*.ptx', '*.qobj', '*.stl', '*.vmi', '*.wrl',
+                          '*.x3d', '.x3dv'] 
+  #   - command: napari-pymeshlab.write_multiple
+  #     layer_types: ['image*','labels*']
+  #     filename_extensions: []
   sample_data:
-    - command: napari-pymeshlab.make_sample_data
-      display_name: napari pymeshlab
-      key: unique_id.1 
+    - command: napari-pymeshlab.make_sphere
+      display_name: sphere
+      key: sphere
+    - command: napari-pymeshlab.make_shell
+      display_name: shell
+      key: shell
   widgets:
-    - command: napari-pymeshlab.make_qwidget
-      display_name: Example QWidget
-    - command: napari-pymeshlab.make_magic_widget
-      display_name: Example Magic Widget
-    - command: napari-pymeshlab.make_func_widget
-      autogenerate: true
-      display_name: Example Function Widget 
+    - command: napari-pymeshlab.screened_poisson_reconstruction
+      display_name: Screened Poisson Reconstruction
+  #   - command: napari-pymeshlab.make_magic_widget
+  #     display_name: Example Magic Widget
+  #   - command: napari-pymeshlab.make_func_widget
+  #     autogenerate: true
+  #     display_name: Example Function Widget 

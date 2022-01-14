@@ -1,18 +1,7 @@
-"""
-This module is an example of a barebones numpy reader plugin for napari.
+import pymeshlab as ml
 
-It implements the Reader specification, but your plugin may choose to
-implement multiple readers or even other plugin contributions. see:
-https://napari.org/plugins/stable/npe2_manifest_specification.html
-
-Replace code below accordingly.  For complete documentation see:
-https://napari.org/docs/dev/plugins/index.html
-"""
-import numpy as np
-
-
-def napari_get_reader(path):
-    """A basic implementation of a Reader contribution.
+def get_mesh_reader(path):
+    """Check if we can use the mesh reader here.
 
     Parameters
     ----------
@@ -32,19 +21,20 @@ def napari_get_reader(path):
         path = path[0]
 
     # if we know we cannot read the file, we immediately return None.
-    if not path.endswith(".npy"):
+    exts = tuple(['.3ds', '.apts', '.asc', '.bre', '.ctm', 
+                  '.dae', '.e57', '.es', '.fbx', '.glb', 
+                  '.gltf', '.obj', '.off', '.pdb', '.ply',
+                  '.ptx', '.qobj', '.stl', '.vmi', '.wrl',
+                  '.x3d', '.x3dv'])
+    if not path.endswith(exts):
         return None
 
     # otherwise we return the *function* that can read ``path``.
-    return reader_function
+    return mesh_reader
 
 
-def reader_function(path):
-    """Take a path or list of paths and return a list of LayerData tuples.
-
-    Readers are expected to return data as a list of tuples, where each tuple
-    is (data, [add_kwargs, [layer_type]]), "add_kwargs" and "layer_type" are
-    both optional.
+def mesh_reader(path):
+    """Read a mesh in using pymeshlab.
 
     Parameters
     ----------
@@ -54,22 +44,26 @@ def reader_function(path):
     Returns
     -------
     layer_data : list of tuples
-        A list of LayerData tuples where each tuple in the list contains
-        (data, metadata, layer_type), where data is a numpy array, metadata is
-        a dict of keyword arguments for the corresponding viewer.add_* method
-        in napari, and layer_type is a lower-case string naming the type of layer.
-        Both "meta", and "layer_type" are optional. napari will default to
-        layer_type=="image" if not provided
+        List of surfaces, one per file path.
     """
     # handle both a string and a list of strings
     paths = [path] if isinstance(path, str) else path
-    # load all files into array
-    arrays = [np.load(_path) for _path in paths]
-    # stack arrays into single array
-    data = np.squeeze(np.stack(arrays))
+
+    ms = ml.MeshSet()  # create a mesh set
+    
+    # load all files into the mesh set
+    for _path in paths:
+        ms.load_new_mesh(_path)
+
+    # loop through the mesh set and parse the surfaces
+    surfaces = []
+    for i in range(ms.number_meshes()):
+        ms.set_current_mesh(i)
+        surfaces.append((ms.current_mesh().vertex_matrix(), 
+                         ms.current_mesh().face_matrix(), 
+                         ms.current_mesh().vertex_color_matrix().T))
 
     # optional kwargs for the corresponding viewer.add_* method
     add_kwargs = {}
 
-    layer_type = "image"  # optional, default is "image"
-    return [(data, add_kwargs, layer_type)]
+    return [(surface, add_kwargs, "surface") for surface in surfaces]
