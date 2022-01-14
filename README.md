@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/zacsimile/napari-pymeshlab/branch/main/graph/badge.svg)](https://codecov.io/gh/zacsimile/napari-pymeshlab)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-pymeshlab)](https://napari-hub.org/plugins/napari-pymeshlab)
 
-Interfaces between napari and pymeshlab library to allow import, export and construction of surfaces.
+Interfaces between napari and pymeshlab library to allow import, export and construction of surfaces. 
 
 ----------------------------------
 
