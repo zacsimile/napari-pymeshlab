@@ -9,11 +9,20 @@
 
 Interfaces between napari and pymeshlab library to allow import, export and construction of surfaces. 
 
+This is a WIP and feature requests are welcome. Please check [PyMeshLab](https://pymeshlab.readthedocs.io/en/latest/)
+for possible features
+## Feature list 
+
+- Read/write .3ds, .apts, .asc, .bre, .ctm, .dae, .e57, .es, .fbx, .glb, .gltf, .obj, .off, .pdb, .ply,
+                  .ptx, .qobj, .stl, .vmi, .wrl, .x3d, .x3dv
+- [Screened Poisson Surface Reconstruction](https://www.cs.jhu.edu/~misha/MyPapers/ToG13.pdf)
+
 ----------------------------------
+
+<!--
 
 This [napari] plugin was generated with [Cookiecutter] using [@napari]'s [cookiecutter-napari-plugin] template.
 
-<!--
 Don't miss the full getting started guide to set up your new package:
 https://github.com/napari/cookiecutter-napari-plugin#getting-started
 
@@ -42,7 +51,7 @@ Distributed under the terms of the [MIT] license,
 
 ## Issues
 
-If you encounter any problems, please [file an issue] along with a detailed description.
+If you encounter any problems, please [file an issue](https://github.com/zacsimile/napari-pymeshlab/issues) along with a detailed description.
 
 [napari]: https://github.com/napari/napari
 [Cookiecutter]: https://github.com/audreyr/cookiecutter
