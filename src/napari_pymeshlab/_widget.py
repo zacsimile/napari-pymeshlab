@@ -25,7 +25,7 @@ def screened_poisson_reconstruction(points_layer: Points, n_neighbors: int = 10,
     Run screened poisson reconstruction on a set of points, using pymeshlab.
     """
 
-    mesh = ml.Mesh(points_layer.data, numpy.empty((1,3)))
+    mesh = ml.Mesh(points_layer.data)
     
     ms = ml.MeshSet()
     ms.add_mesh(mesh)
