@@ -21,7 +21,7 @@ and review the napari docs for plugin developers:
 https://napari.org/plugins/stable/index.html
 -->
 
-## Installation
+## Installation 
 
 You can install `napari-pymeshlab` via [pip]:
 
