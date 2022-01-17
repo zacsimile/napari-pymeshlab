@@ -10,7 +10,7 @@
 Interfaces between `napari` and the `pymeshlab` library to allow import, export and construction of surfaces. 
 
 This is a WIP and feature requests are welcome. Please check [PyMeshLab](https://pymeshlab.readthedocs.io/en/latest/)
-for possible features
+for possible features.
 ## Feature list 
 
 - Read/write .3ds, .apts, .asc, .bre, .ctm, .dae, .e57, .es, .fbx, .glb, .gltf, .obj, .off, .pdb, .ply,

@@ -17,6 +17,9 @@ contributions:
     - id: napari-pymeshlab.make_shell
       python_name: napari_pymeshlab._sample_data:make_shell
       title: Load sample points on a shell
+    - id: napari-pymeshlab.make_bunny
+      python_name: napari_pymeshlab._sample_data:make_bunny
+      title: Load sample points representing Stanford bunny
     - id: napari-pymeshlab.screened_poisson_reconstruction
       python_name: napari_pymeshlab._widget:screened_poisson_reconstruction
       title: Perform Screened Poisson Reconstruction on a point cloud
@@ -52,6 +55,9 @@ contributions:
     - command: napari-pymeshlab.make_shell
       display_name: shell
       key: shell
+    - command: napari-pymeshlab.make_bunny
+      display_name: bunny
+      key: bunny
   widgets:
     - command: napari-pymeshlab.screened_poisson_reconstruction
       display_name: Screened Poisson Reconstruction
