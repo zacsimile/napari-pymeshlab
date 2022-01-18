@@ -26,7 +26,7 @@ def write_single_surface(path: str, data: Any, meta: dict):
         vertices, faces = data
 
 
-    if colors and (type(colors) == np.ndarray) and (colors.shape[1] == 4):
+    if (colors is not None) and (type(colors) == np.ndarray) and (colors.shape[1] == 4):
         mesh = ml.Mesh(vertices, faces, v_color_matrix=colors.T)
     else:
         mesh = ml.Mesh(vertices, faces)
