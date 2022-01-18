@@ -22,7 +22,7 @@ def write_single_surface(path: str, data: Any, meta: dict):
     colors = None
     try:
         vertices, faces, colors = data  # unwrap surface data
-    except:
+    except ValueError:
         vertices, faces = data
 
 
