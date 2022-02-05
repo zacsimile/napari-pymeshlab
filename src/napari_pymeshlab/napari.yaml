@@ -23,6 +23,21 @@ contributions:
     - id: napari-pymeshlab.screened_poisson_reconstruction
       python_name: napari_pymeshlab._widget:screened_poisson_reconstruction
       title: Perform Screened Poisson Reconstruction on a point cloud
+    - id: napari-pymeshlab._convex_hull
+      python_name: napari_pymeshlab._widget:_convex_hull
+      title: Convex hull of surface
+    - id: napari-pymeshlab._laplacian_smooth
+      python_name: napari_pymeshlab._widget:_laplacian_smooth
+      title: Laplacian smoothing of a surface
+    - id: napari-pymeshlab._taubin_smooth
+      python_name: napari_pymeshlab._widget:_taubin_smooth
+      title: Taubin smoothing of a surface
+    - id: napari-pymeshlab._simplification_clustering_decimation
+      python_name: napari_pymeshlab._widget:_simplification_clustering_decimation
+      title: Simplification of a surface using clustering decimation
+    - id: napari-pymeshlab._colorize_curvature_apss
+      python_name: napari_pymeshlab._widget:_colorize_curvature_apss
+      title: Colorize curvature (apss)
     # - id: napari-pymeshlab.make_magic_widget
     #   python_name: napari_pymeshlab._widget:example_magic_widget
     #   title: Make example magic widget
