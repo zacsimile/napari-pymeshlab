@@ -47,7 +47,12 @@ You can install `napari-pymeshlab` via [pip]:
     pip install napari-pymeshlab
 
 
+## See also
 
+Other napari plugins with similar / overlapping functionality include
+
+* [napari-process-points-and-surfaces](https://www.napari-hub.org/plugins/napari-process-points-and-surfaces)
+* [napari-pyclesperanto-assistant](https://www.napari-hub.org/plugins/napari-pyclesperanto-assistant)
 
 ## Contributing
 

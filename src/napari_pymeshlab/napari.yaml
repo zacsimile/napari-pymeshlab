@@ -22,7 +22,7 @@ contributions:
       title: Load sample points representing Stanford bunny
     - id: napari-pymeshlab.screened_poisson_reconstruction
       python_name: napari_pymeshlab._widget:screened_poisson_reconstruction
-      title: Perform Screened Poisson Reconstruction on a point cloud
+      title: Generate surface from point cloud via Screened Poisson Reconstruction
     - id: napari-pymeshlab._convex_hull
       python_name: napari_pymeshlab._widget:_convex_hull
       title: Convex hull of surface
@@ -76,6 +76,16 @@ contributions:
   widgets:
     - command: napari-pymeshlab.screened_poisson_reconstruction
       display_name: Screened Poisson Reconstruction
+    - command: napari-pymeshlab._convex_hull
+      display_name: Convex hull
+    - command: napari-pymeshlab._laplacian_smooth
+      display_name: Laplacian smoothing
+    - command: napari-pymeshlab._taubin_smooth
+      display_name: Taubin smoothing
+    - command: napari-pymeshlab._simplification_clustering_decimation
+      display_name: Clustering decimation
+    - command: napari-pymeshlab._colorize_curvature_apss
+      display_name: Colorize curvature
   #   - command: napari-pymeshlab.make_magic_widget
   #     display_name: Example Magic Widget
   #   - command: napari-pymeshlab.make_func_widget
