@@ -1,3 +1,4 @@
 npe2
 numpy
 pymeshlab
+-e .

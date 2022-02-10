@@ -7,15 +7,25 @@
 [![codecov](https://codecov.io/gh/zacsimile/napari-pymeshlab/branch/main/graph/badge.svg)](https://codecov.io/gh/zacsimile/napari-pymeshlab)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-pymeshlab)](https://napari-hub.org/plugins/napari-pymeshlab)
 
-Interfaces between `napari` and the `pymeshlab` library to allow import, export and construction of surfaces. 
+Interfaces between `napari` and the `pymeshlab` library to allow import, export, construction and processing of surfaces. 
 
 This is a WIP and feature requests are welcome. Please check [PyMeshLab](https://pymeshlab.readthedocs.io/en/latest/)
 for possible features.
-## Feature list 
+
+![img.png](docs/screenshot.png)
+
+## Feature list
 
 - Read/write .3ds, .apts, .asc, .bre, .ctm, .dae, .e57, .es, .fbx, .glb, .gltf, .obj, .off, .pdb, .ply,
                   .ptx, .qobj, .stl, .vmi, .wrl, .x3d, .x3dv
 - [Screened Poisson Surface Reconstruction](https://www.cs.jhu.edu/~misha/MyPapers/ToG13.pdf)
+- [Convex hull of a surface](https://pymeshlab.readthedocs.io/en/0.1.9/tutorials/apply_filter.html)
+- [Laplacian smoothing of surfaces](https://pymeshlab.readthedocs.io/en/0.1.9/filter_list.html#laplacian_smooth)
+- [Smoothing surfaces using Taubin's method](https://pymeshlab.readthedocs.io/en/0.1.9/filter_list.html#taubin_smooth)
+- [Surface simplification using clustering decimation](https://pymeshlab.readthedocs.io/en/0.1.9/filter_list.html#simplification_clustering_decimation)
+- [colorize_curvature_apss](https://pymeshlab.readthedocs.io/en/0.1.9/filter_list.html#colorize_curvature_apss)
+
+Some functions are shown in the [demo notebook](docs/demo.ipynb).
 
 ----------------------------------
 
@@ -46,7 +56,7 @@ the coverage at least stays the same before you submit a pull request.
 
 ## License
 
-Distributed under the terms of the [MIT] license,
+Distributed under the terms of the [GNU GPL v3.0] license,
 "napari-pymeshlab" is free and open source software
 
 ## Issues
