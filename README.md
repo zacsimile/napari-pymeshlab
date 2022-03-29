@@ -12,7 +12,7 @@ Interfaces between `napari` and the `pymeshlab` library to allow import, export,
 This is a WIP and feature requests are welcome. Please check [PyMeshLab](https://pymeshlab.readthedocs.io/en/latest/)
 for possible features.
 
-![img.png](docs/screenshot.png)
+![img.png](https://github.com/zacsimile/napari-pymeshlab/raw/main/docs/screenshot.png)
 
 ## Feature list
 
