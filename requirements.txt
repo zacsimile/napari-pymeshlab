@@ -1,4 +1,5 @@
 npe2
 numpy
 pymeshlab
--e .
+pyqt5
+magicgui[pyqt5]
