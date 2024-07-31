@@ -23,10 +23,10 @@ jobs:
         platform: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
         exclude:
-          - os: macos-latest
-            pyversion: '3.8'
-          - os: macos-latest
-            pyversion: '3.9'
+          - platform: macos-latest
+            python-version: '3.8'
+          - platform: macos-latest
+            python-version: '3.9'
 
     steps:
       - uses: actions/checkout@v4
@@ -62,10 +62,10 @@ jobs:
         platform: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
         exclude:
-          - os: macos-latest
-            pyversion: '3.8'
-          - os: macos-latest
-            pyversion: '3.9'
+          - platform: macos-latest
+            python-version: '3.8'
+          - platform: macos-latest
+            python-version: '3.9'
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
