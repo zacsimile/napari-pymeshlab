@@ -1,3 +1,4 @@
+napari
 npe2
 numpy
 pymeshlab
