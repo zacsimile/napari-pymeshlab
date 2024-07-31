@@ -49,7 +49,7 @@ jobs:
     # and requires that you have put your twine API key in your
     # github secrets (see readme for details)
     needs: [test]
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.platform }}
     if: contains(github.ref, 'tags')
     strategy:
       fail-fast: false
