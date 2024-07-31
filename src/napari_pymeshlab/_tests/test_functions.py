@@ -1,5 +1,11 @@
 def test_something():
-    from napari_pymeshlab import convex_hull, laplacian_smooth, taubin_smooth, simplification_clustering_decimation, colorize_curvature_apss
+    from napari_pymeshlab import (
+        # convex_hull,
+        laplacian_smooth,
+        taubin_smooth,
+        simplification_clustering_decimation,
+        colorize_curvature_apss,
+    )
     from skimage.measure import regionprops
     from skimage.measure import marching_cubes
     from skimage.data import cells3d
@@ -21,7 +27,7 @@ def test_something():
     vertices, faces, normals, values = marching_cubes(binary, 0)
     surface = (vertices, faces, values)
 
-    convex_hull(surface)
+    # convex_hull(surface)
     laplacian_smooth(surface)
     taubin_smooth(surface)
     simplification_clustering_decimation(surface)

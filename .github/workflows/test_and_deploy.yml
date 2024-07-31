@@ -16,9 +16,15 @@ jobs:
     name: ${{ matrix.platform }} py${{ matrix.python-version }}
     runs-on: ${{ matrix.platform }}
     strategy:
+      fail-fast: false
       matrix:
-        platform: ['ubuntu-20.04', 'windows-latest'] #, macos-latest]
+        platform: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        exclude:
+          - os: macos-latest
+            pyversion: '3.8'
+          - os: macos-latest
+            pyversion: '3.9'
 
     steps:
       - uses: actions/checkout@v4
@@ -48,12 +54,22 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     if: contains(github.ref, 'tags')
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ['ubuntu-latest', 'windows-latest', 'macos-latest']
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        exclude:
+          - os: macos-latest
+            pyversion: '3.8'
+          - os: macos-latest
+            pyversion: '3.9'
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
