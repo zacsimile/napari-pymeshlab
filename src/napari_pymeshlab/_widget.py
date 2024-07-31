@@ -80,8 +80,11 @@ def convex_hull(surface: SurfaceData) -> SurfaceData:
     ms = pymeshlab.MeshSet()
     ms.add_mesh(mesh)
     ms.set_current_mesh(0)
-
-    ms.convex_hull()
+    
+    try: 
+        ms.convex_hull()
+    except:
+        ms.generate_convex_hull()
 
     mesh = ms.mesh(1)
 
@@ -117,7 +120,12 @@ def laplacian_smooth(surface: SurfaceData, step_smooth_num: int = 10) -> Surface
     ms = pymeshlab.MeshSet()
     ms.add_mesh(mesh)
     ms.set_current_mesh(0)
-    ms.laplacian_smooth(stepsmoothnum=step_smooth_num)
+    
+    try: 
+        ms.laplacian_smooth(stepsmoothnum=step_smooth_num)
+    except: 
+        ms.apply_coord_laplacian_smoothing(stepsmoothnum=step_smooth_num)
+        
     mesh = ms.mesh(0)
 
     faces = np.asarray(mesh.polygonal_face_list())
@@ -165,10 +173,18 @@ def taubin_smooth(surface: SurfaceData,
     ms = pymeshlab.MeshSet()
     ms.add_mesh(mesh)
     ms.set_current_mesh(0)
-    ms.taubin_smooth(lambda_=lambda_,
-                     mu=mu,
-                     stepsmoothnum=step_smooth_num
-                     )
+    
+    try: 
+        ms.taubin_smooth(lambda_=lambda_,
+                        mu=mu,
+                        stepsmoothnum=step_smooth_num
+                        )
+    
+    except:
+        ms.apply_coord_taubin_smoothing(lambda_=lambda_,
+                        mu=mu,
+                        stepsmoothnum=step_smooth_num
+                        )
 
     mesh = ms.mesh(0)
 
@@ -211,7 +227,11 @@ def simplification_clustering_decimation(surface: SurfaceData,
     ms = pymeshlab.MeshSet()
     ms.add_mesh(mesh)
     ms.set_current_mesh(0)
-    ms.simplification_clustering_decimation(threshold=pymeshlab.Percentage(threshold_percentage))
+    
+    try: 
+        ms.simplification_clustering_decimation(threshold=pymeshlab.Percentage(threshold_percentage))
+    except:
+        ms.meshing_decimation_clustering(threshold=pymeshlab.PercentageValue(threshold_percentage))
     mesh = ms.mesh(0)
 
     faces = np.asarray(mesh.polygonal_face_list())
@@ -268,14 +288,24 @@ def colorize_curvature_apss(surface: SurfaceData,
     ms = pymeshlab.MeshSet()
     ms.add_mesh(mesh)
     ms.set_current_mesh(0)
-    ms.colorize_curvature_apss(
-        filterscale=filter_scale,
-        projectionaccuracy=projection_accuracy,
-        maxprojectioniters=max_projection_iterations,
-        sphericalparameter=spherical_parameter,
-        curvaturetype=curvature_type.value
-    )
-
+    try: 
+        ms.compute_curvature_and_color_apss_per_vertex(
+            filterscale=filter_scale,
+            projectionaccuracy=projection_accuracy,
+            maxprojectioniters=max_projection_iterations,
+            sphericalparameter=spherical_parameter,
+            curvaturetype=curvature_type.value
+        )
+    
+    except: 
+        ms.colorize_curvature_apss(
+            filterscale=filter_scale,
+            projectionaccuracy=projection_accuracy,
+            maxprojectioniters=max_projection_iterations,
+            sphericalparameter=spherical_parameter,
+            curvaturetype=curvature_type.value
+        )
+        
     mesh = ms.mesh(0)
 
     faces = np.asarray(mesh.polygonal_face_list())
