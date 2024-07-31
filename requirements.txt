@@ -3,3 +3,4 @@ numpy
 pymeshlab
 pyqt5
 magicgui[pyqt5]
+-e .
